@@ -44,7 +44,7 @@ export const MultiDirectionTooltip: React.FC<MultiDirectionTooltipProps> = ({
 
   const triggerRef = useRef<HTMLDivElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const timeoutRef = useRef<number>();
   const id = useId();
 
   // Memoized metadata for callbacks
@@ -174,7 +174,7 @@ export const MultiDirectionTooltip: React.FC<MultiDirectionTooltipProps> = ({
       clearTimeout(timeoutRef.current);
     }
 
-    timeoutRef.current = setTimeout(() => {
+    timeoutRef.current = window.setTimeout(() => {
       setIsOpen(true);
       onOpen?.(metadata);
     }, openDelay);
@@ -185,7 +185,7 @@ export const MultiDirectionTooltip: React.FC<MultiDirectionTooltipProps> = ({
       clearTimeout(timeoutRef.current);
     }
 
-    timeoutRef.current = setTimeout(() => {
+    timeoutRef.current = window.setTimeout(() => {
       setIsOpen(false);
       onClose?.(metadata);
     }, closeDelay);
@@ -266,7 +266,7 @@ export const MultiDirectionTooltip: React.FC<MultiDirectionTooltipProps> = ({
   useEffect(() => {
     if (isOpen) {
       // Small delay to ensure DOM is updated
-      const timer = setTimeout(updatePosition, 0);
+      const timer = window.setTimeout(updatePosition, 0);
       return () => clearTimeout(timer);
     }
   }, [isOpen, updatePosition]);
