@@ -44,7 +44,7 @@ export const MultiDirectionTooltip: React.FC<MultiDirectionTooltipProps> = ({
 
   const triggerRef = useRef<HTMLDivElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
   const id = useId();
 
   // Memoized metadata for callbacks
